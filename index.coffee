@@ -12,7 +12,7 @@ class Post
     body = fs.readFileSync @post, 'utf-8'
     @matter = fm(body.toString())
     @title = @matter.attributes.title ? "No title defined."
-    @permalink = S(@post).slugify().s
+    @permalink = S(@title).slugify().s
     @date = moment(@matter.attributes.date)
     @tags = @matter.attributes.tags ? ['default']
     @author = @matter.attributes.author ? 'Adam Stokes'
