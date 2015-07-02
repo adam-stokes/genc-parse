@@ -29,4 +29,4 @@ module.exports = (dir) ->
       posts = []
       for post in items
         posts.push new Post(post)
-      return Promise.all(posts))
+      return posts)
