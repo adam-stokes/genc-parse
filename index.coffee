@@ -1,10 +1,10 @@
-fs = require('fs-extra-promise')
+fs = require('fs-extra')
 fm = require('fastmatter')
 moment = require('moment')
 markdown = require('marked')
-glob = require('glob-promise')
-Promise = require('bluebird')
+glob = require('glob')
 S = require('string')
+_ = require('lodash')
 
 class Post
   constructor: (post) ->
@@ -12,21 +12,15 @@ class Post
     body = fs.readFileSync @post, 'utf-8'
     @matter = fm(body.toString())
     @title = @matter.attributes.title ? "No title defined."
+    @layout = @matter.attributes.layout ? "post"
     @permalink = S(@title).slugify().s
     @date = moment(@matter.attributes.date)
     @tags = @matter.attributes.tags ? ['default']
     @author = @matter.attributes.author ? 'Adam Stokes'
     @html = markdown(@matter.body)
-  inCat: (cat) ->
-    if cat in @tags
-      return true
-    return false
 
+setPost = (post) ->
+  return new Post(post)
 
 module.exports = (dir) ->
-  return glob("#{dir}/*")
-    .then((items) ->
-      posts = []
-      for post in items
-        posts.push new Post(post)
-      return posts)
+  return _.map(glob.sync("#{dir}"), setPost)

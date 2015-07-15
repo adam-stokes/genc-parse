@@ -1,8 +1,6 @@
 parse = require('.')
+_ = require('lodash')
 
-parse('/home/adam/Dropbox/Articles')
-  .then((posts) ->
-    for post in posts
-      console.log post.inCat('ubuntu'))
-  .catch((e) ->
-    console.error e)
+TESTDIR = '/home/adam/Dropbox/Articles/*'
+files = parse(TESTDIR)
+_.each(files, (f) -> console.log f.title)
