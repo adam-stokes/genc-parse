@@ -1,28 +1,20 @@
 {
   "name": "genc-parse",
   "version": "1.0.0",
-  "description": "parse blog posts",
-  "main": "index.coffee",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/battlemidget/genc-parse.git"
-  },
+  "main": "index.js",
+  "repository": "battlemidget/genc-parse",
   "author": "adam stokes <hackr@cypherbook.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/battlemidget/genc-parse/issues"
-  },
-  "homepage": "https://github.com/battlemidget/genc-parse#readme",
   "dependencies": {
+    "bluebird": "^2.9.34",
+    "co": "^4.6.0",
+    "debug": "^2.2.0",
     "fastmatter": "^1.1.0",
-    "fs-extra": "^0.22.1",
-    "glob": "^5.0.14",
     "lodash": "^3.10.0",
     "marked": "^0.3.3",
     "moment": "^2.10.3",
+    "mz": "^2.0.0",
     "string": "^3.3.0"
-  }
+  },
+  "license": "MIT",
+  "description": "genc - parse directory of posts."
 }
