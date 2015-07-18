@@ -16,7 +16,6 @@ module.exports = function(source) {
         .then(function(files) {
             var out = [];
             _.each(files, function(f) {
-                debug("Processing: %s", f);
                 var body = fs.readFileSync(join(source, f), "utf8");
                 var matter = fm(body.toString());
                 debug(matter.attributes);
