@@ -1,7 +1,6 @@
 "use strict";
 var fs = require("mz/fs");
 var fm = require("fastmatter");
-var moment = require("moment");
 var markdown = require("marked");
 var string = require("string");
 var _ = require("lodash");
@@ -18,7 +17,6 @@ module.exports = function(source) {
                 debug(matter.attributes);
                 var meta = {
                     body: markdown(matter.body),
-                    date: moment(matter.attributes.date),
                     filename: join(source, f)
                 };
                 _.merge(meta, matter.attributes);
