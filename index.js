@@ -5,13 +5,10 @@ var moment = require("moment");
 var markdown = require("marked");
 var string = require("string");
 var _ = require("lodash");
-var debug = require("debug")("genc:parser");
-var assert = require("assert");
+var debug = require("debug")("genc:parse");
 var join = require("path").join;
 
 module.exports = function(source) {
-    assert(source, "Must pass a source location.");
-    debug("Parsing %s", source);
     return fs.readdir(source)
         .then(function(files) {
             var out = [];
@@ -20,16 +17,25 @@ module.exports = function(source) {
                 var matter = fm(body.toString());
                 debug(matter.attributes);
                 var meta = {
-                    title: matter.attributes.title || "No title defined.",
-                    layout: matter.attributes.layout || "post",
-                    permalink: string(matter.attributes.title).slugify().s,
+                    body: markdown(matter.body),
                     date: moment(matter.attributes.date),
-                    tags: matter.attributes.tags || ["default"],
-                    author: matter.attributes.author || "Incognito blogerito",
-                    html: markdown(matter.body)
+                    filename: join(source, f)
                 };
+                _.merge(meta, matter.attributes);
+                var noPermalink = meta.permalink === undefined;
+                if (noPermalink) {
+                    _.merge(meta, {
+                        permalink: string(matter.attributes.title).slugify().s
+                    });
+                }
+                var noTemplate = meta.tempalte === undefined;
+                if (noTemplate){
+                    _.merge(meta, {
+                        template: "post.jade"
+                    });
+                }
                 out.push(meta);
             });
-            return out;
+            return _.sortByOrder(out, ["date"], ["desc"]);
         });
 };
