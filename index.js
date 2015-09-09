@@ -4,7 +4,6 @@ var fm = require("fastmatter");
 var markdown = require("marked");
 var string = require("string");
 var _ = require("lodash");
-var debug = require("debug")("genc:parse");
 var join = require("path").join;
 
 module.exports = function(source) {
@@ -14,7 +13,6 @@ module.exports = function(source) {
             _.each(files, function(f) {
                 var body = fs.readFileSync(join(source, f), "utf8");
                 var matter = fm(body.toString());
-                debug(matter.attributes);
                 var meta = {
                     body: markdown(matter.body),
                     filename: join(source, f)

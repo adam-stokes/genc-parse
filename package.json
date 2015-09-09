@@ -1,6 +1,6 @@
 {
     "name": "genc-parse",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "index.js",
     "repository": "battlemidget/genc-parse",
     "author": "adam stokes <hackr@cypherbook.com>",
@@ -12,10 +12,5 @@
         "string": "^3.3.0"
     },
     "license": "MIT",
-    "description": "genc - parse directory of posts.",
-    "devDependencies": {
-        "co": "^4.6.0",
-        "debug": "^2.2.0"
-
-    }
+    "description": "genc - parse directory of posts."
 }
